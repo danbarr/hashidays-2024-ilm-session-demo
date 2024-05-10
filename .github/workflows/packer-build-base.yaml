@@ -14,11 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: ECR login
-        id: login
-        run: 'echo $ECR_LOGIN_PASSWORD | docker login --username AWS --password-stdin ${{ vars.ECR_HOST }}'
-        env:
-          ECR_LOGIN_PASSWORD: ${{ secrets.ECR_LOGIN_PASSWORD }}
+      - name: Login to ECR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.ECR_HOST }}
+          username: AWS
+          password: ${{ secrets.ECR_LOGIN_PASSWORD }}
+          ecr: false
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
