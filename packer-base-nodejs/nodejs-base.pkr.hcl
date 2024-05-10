@@ -49,10 +49,8 @@ build {
       tags       = ["20", "latest"]
     }
     post-processor "docker-push" {
-      login          = true
-      login_server   = var.registry_host
-      login_username = var.registry_username
-      login_password = var.registry_password
+      ecr_login    = var.registry_is_ecr
+      login_server = var.registry_host
     }
   }
 }

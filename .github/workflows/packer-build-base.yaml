@@ -10,19 +10,10 @@ jobs:
     name: Run Packer
     env:
       PKR_VAR_registry_host: ${{ vars.ECR_HOST }}
-      PKR_VAR_registry_username: AWS
-      PKR_VAR_registry_password: ${{ secrets.ECR_LOGIN_PASSWORD }}
+      PKR_VAR_registry_is_ecr: 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-#      - name: Login to ECR
-#        uses: docker/login-action@v3
-#        with:
-#          registry: ${{ vars.ECR_HOST }}
-#          username: AWS
-#          password: ${{ secrets.ECR_LOGIN_PASSWORD }}
-#          ecr: false
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main

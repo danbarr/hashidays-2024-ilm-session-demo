@@ -12,11 +12,6 @@ variable "registry_host" {
   type = string
 }
 
-variable "registry_username" {
-  type = string
-}
-
-variable "registry_password" {
-  type      = string
-  sensitive = true
+variable "registry_is_ecr" {
+  type = bool
 }
