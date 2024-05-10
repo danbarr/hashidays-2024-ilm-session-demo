@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   hcp-packer:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: Run Packer
     env:
       PKR_VAR_registry_host: ${{ vars.ECR_HOST }}
