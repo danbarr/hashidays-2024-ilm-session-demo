@@ -8,6 +8,8 @@ jobs:
   hcp-packer:
     runs-on: ubuntu-latest
     name: Run Packer
+    env:
+      PKR_VAR_registry: ${{ secrets.ECR_ADDRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +38,6 @@ jobs:
       - name: Build Artifact
         run: 'packer build -color=false -on-error=abort ./packer-base-nodejs'
         env:
-          PKR_VAR_registry: ${{ secrets.ECR_ADDRESS }}
           HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
           HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
           HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
