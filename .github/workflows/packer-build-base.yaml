@@ -1,0 +1,42 @@
+name: hcp-packer-base
+on:
+  push:
+    paths:
+      - 'packer-base-nodejs/**'
+  workflow_dispatch:
+jobs:
+  hcp-packer:
+    runs-on: ubuntu-latest
+    name: Run Packer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: ECR login
+        id: login
+        run: 'docker login --username AWS --password $ECR_LOGIN_PASSWORD $ECR_ADDRESS'
+        env:
+          ECR_LOGIN_PASSWORD: ${{ secrets.ECR_LOGIN_PASSWORD }}
+          ECR_ADDRESS: ${{ secrets.ECR_ADDRESS }}
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: 'latest'
+
+      - name: Run `packer init`
+        id: init
+        run: 'packer init ./packer-base-nodejs/nodejs-base.pkr.hcl'
+
+      - name: Run `packer validate`
+        id: validate
+        run: 'packer validate ./packer-base-nodejs/nodejs-base.pkr.hcl'
+
+      - name: Build Artifact
+        run: 'packer build -color=false -on-error=abort ./packer-base-nodejs/nodejs-base.pkr.hcl'
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+          HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
+          HCP_PACKER_BUILD_FINGERPRINT: run.id.${{ github.run_id }}.run.attempt.${{ github.run_attempt }}
