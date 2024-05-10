@@ -27,15 +27,16 @@ jobs:
 
       - name: Run `packer init`
         id: init
-        run: 'packer init ./packer-base-nodejs/nodejs-base.pkr.hcl'
+        run: 'packer init ./packer-base-nodejs'
 
       - name: Run `packer validate`
         id: validate
-        run: 'packer validate ./packer-base-nodejs/nodejs-base.pkr.hcl'
+        run: 'packer validate ./packer-base-nodejs'
 
       - name: Build Artifact
-        run: 'packer build -color=false -on-error=abort ./packer-base-nodejs/nodejs-base.pkr.hcl'
+        run: 'packer build -color=false -on-error=abort ./packer-base-nodejs'
         env:
+          PKR_VAR_registry: ${{ secrets.ECR_ADDRESS }}
           HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
           HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
           HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
