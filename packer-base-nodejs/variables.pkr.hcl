@@ -8,6 +8,15 @@ variable "owner" {
   default = "releng"
 }
 
-variable "registry" {
+variable "registry_host" {
   type = string
+}
+
+variable "registry_username" {
+  type = string
+}
+
+variable "registry_password" {
+  type      = string
+  sensitive = true
 }
