@@ -15,3 +15,8 @@ variable "registry_host" {
 variable "registry_is_ecr" {
   type = bool
 }
+
+variable "extra_tags" {
+  type    = list(string)
+  default = []
+}

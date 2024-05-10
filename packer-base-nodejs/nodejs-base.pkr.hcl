@@ -9,7 +9,8 @@ packer {
 }
 
 locals {
-  timestamp = regex_replace(timestamp(), "[- TZ:]", "")
+  timestamp         = timestamp()
+  timestamp_cleaned = regex_replace(timestamp(), "[- TZ:]", "")
 }
 
 source "docker" "node-20" {
@@ -17,6 +18,7 @@ source "docker" "node-20" {
   commit   = true
   platform = "linux/amd64"
   changes = [
+    "LABEL build-date=${local.timestamp}",
     "USER node"
   ]
 }
@@ -46,8 +48,9 @@ build {
   post-processors {
     post-processor "docker-tag" {
       repository = "${var.registry_host}/node-20-hashicafe-base"
-      tags       = ["20", "latest"]
+      tags       = concat(var.extra_tags, [local.timestamp_cleaned, "latest"])
     }
+
     post-processor "docker-push" {
       ecr_login    = var.registry_is_ecr
       login_server = var.registry_host
