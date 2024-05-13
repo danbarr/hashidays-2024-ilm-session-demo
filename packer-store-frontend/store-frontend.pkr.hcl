@@ -44,7 +44,6 @@ build {
     bucket_labels = {
       "owner" = var.owner
       "dept"  = var.department
-      "parent-image" = data.hcp-packer-artifact.nodejs-20-base.labels["PackerArtifactID"]
       "node-version" = "20"
     }
     build_labels = {
