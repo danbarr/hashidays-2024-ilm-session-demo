@@ -20,10 +20,12 @@ data "hcp-packer-artifact" "nodejs-20-base" {
 }
 
 source "docker" "store-frontend" {
-  image    = data.hcp-packer-artifact.nodejs-20-base.labels["ImageDigest"]
-  commit   = true
-  platform = "linux/amd64"
-  exec_user = "root:root"
+  image        = data.hcp-packer-artifact.nodejs-20-base.labels["ImageDigest"]
+  ecr_login    = var.registry_is_ecr
+  login_server = var.registry_host
+  commit       = true
+  platform     = "linux/amd64"
+  exec_user    = "root:root"
 
   changes = [
     "LABEL build-date=${local.timestamp}",
@@ -42,8 +44,8 @@ build {
     bucket_name = "hashicafe-store-frontend"
     description = "Docker child image."
     bucket_labels = {
-      "owner" = var.owner
-      "dept"  = var.department
+      "owner"        = var.owner
+      "dept"         = var.department
       "node-version" = "20"
     }
     build_labels = {
@@ -56,7 +58,7 @@ build {
   ]
 
   provisioner "file" {
-    source = "${path.root}/../apps/store-frontend/"
+    source      = "${path.root}/../apps/store-frontend/"
     destination = "/app"
   }
 
