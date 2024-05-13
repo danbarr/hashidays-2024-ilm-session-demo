@@ -1,0 +1,38 @@
+name: hcp-packer-base
+on:
+  push:
+    paths:
+      - 'packer-store-frontend/**'
+  workflow_dispatch:
+jobs:
+  hcp-packer:
+    runs-on: self-hosted
+    name: Run Packer
+    env:
+      PKR_VAR_registry_host: ${{ vars.ECR_HOST }}
+      PKR_VAR_registry_is_ecr: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: 'latest'
+
+      - name: Run `packer init`
+        id: init
+        run: 'packer init ./packer-store-frontend'
+
+      - name: Run `packer validate`
+        id: validate
+        run: 'packer validate ./packer-store-frontend'
+
+      - name: Build Artifact
+        run: 'packer build -color=false -on-error=abort ./packer-store-frontend'
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+          HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
+          HCP_PACKER_BUILD_FINGERPRINT: run.id.${{ github.run_id }}.run.attempt.${{ github.run_attempt }}
