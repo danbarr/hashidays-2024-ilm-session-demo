@@ -7,25 +7,25 @@
     "start": "next start -p 4001"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
-    "@hashicorp/flight-icons": "^2.0.1",
-    "@tailwindcss/line-clamp": "^0.3.0",
-    "axios": "^0.24.0",
-    "flatted": "^3.2.4",
-    "graphql": "^16.3.0",
-    "miragejs": "^0.1.43",
-    "next": "^12.1.0",
+    "@apollo/client": "^3.10.3",
+    "@hashicorp/flight-icons": "^3.1.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "axios": "^1.6.8",
+    "flatted": "^3.3.1",
+    "graphql": "^16.8.1",
+    "miragejs": "^0.1.48",
+    "next": "^14.2.3",
     "next-dark-mode": "^3.0.0",
-    "next-themes": "^0.0.15",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-number-format": "^4.9.1",
-    "react-scroll": "^1.8.4",
-    "swr": "^1.1.2"
+    "next-themes": "^0.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-number-format": "^5.3.4",
+    "react-scroll": "^1.9.0",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.4",
-    "tailwindcss": "^3.0.0"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }
