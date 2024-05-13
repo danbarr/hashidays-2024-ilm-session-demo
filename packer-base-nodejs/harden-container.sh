@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 mkdir /app
 chmod 755 /app
