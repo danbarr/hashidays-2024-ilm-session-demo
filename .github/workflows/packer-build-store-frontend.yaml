@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'packer-store-frontend/**'
+      - 'apps/store-frontend/**'
   workflow_dispatch:
 jobs:
   hcp-packer:
