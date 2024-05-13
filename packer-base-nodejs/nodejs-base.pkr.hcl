@@ -43,6 +43,10 @@ build {
   ]
 
   provisioner "shell" {
+    inline = ["apk upgrade --no-cache"]
+  }
+
+  provisioner "shell" {
     script = "${path.root}/harden-container.sh"
   }
 
