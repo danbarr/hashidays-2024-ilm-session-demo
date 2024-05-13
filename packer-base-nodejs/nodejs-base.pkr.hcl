@@ -14,7 +14,7 @@ locals {
 }
 
 source "docker" "node-20" {
-  image    = "node:20"
+  image    = "node:20-alpine"
   commit   = true
   platform = "linux/amd64"
   changes = [
@@ -31,6 +31,7 @@ build {
       "owner"        = var.owner
       "dept"         = var.department
       "node-version" = "20"
+      "platform"     = "alpine"
     }
     build_labels = {
       "build-time" = local.timestamp
