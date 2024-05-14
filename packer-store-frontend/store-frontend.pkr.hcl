@@ -42,7 +42,7 @@ source "docker" "store-frontend" {
 build {
   hcp_packer_registry {
     bucket_name = "hashicafe-store-frontend"
-    description = "Docker child image."
+    description = "HashiCafe store frontend Node.js application container."
     bucket_labels = {
       "owner"        = var.owner
       "dept"         = var.department
