@@ -1,4 +1,4 @@
-name: hcp-packer-base
+name: hcp-packer-store-frontend
 on:
   push:
     paths:
