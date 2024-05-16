@@ -1,16 +1,25 @@
 # Demo repo for HashiDays 2024 session "Unlocking Infrastructure Lifeycle Management"
 
-Watch this space!
+This demo was built for the HashiDays 2024 session "Unlocking Infrastructure Lifeycle Management". It is meant to be used with the Terraform no-code module [terraform-aws-waypoint-ecs-frontend-service](https://github.com/danbarr/terraform-aws-waypoint-ecs-frontend-service).
 
 ## Prerequisites
 
 - A [HashiCorp Cloud Platform (HCP) account](https://developer.hashicorp.com/hcp/docs/hcp/create-account) with HCP Packer and HCP Waypoint activated and [connected](https://developer.hashicorp.com/hcp/docs/waypoint/configure-hcp-terraform-integration) to your HCP Terraform organization
+
 - An [HCP Terraform organization](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-sign-up) with Plus tier licensing
-  - You must authorize HCP Terraform to your GitHub account via [GitHub App integration](https://developer.hashicorp.com/terraform/cloud-docs/vcs/github-app)
+
 - An AWS account with a Route 53 public hosted zone
   - AWS credentials must be available in your HCP Terraform organization, usually a global variable set or connected to the projects this demo will create. I recommend using [dynamic provider credentials](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials/aws-configuration).
 
 Note this demo creates resources which are not part of the AWS Free Tier. You are responsible for any incurred costs.
+
+To use the bootstrap configuration to set up this demo in your organization, you must also:
+
+- Authorize HCP Terraform to your GitHub account via [GitHub App integration](https://developer.hashicorp.com/terraform/cloud-docs/vcs/github-app)
+
+- Ensure appropriate credentials are attached to the HCP Terraform projects created for the demo via variable set(s):
+  - AWS credentials with access to manage VPCs, ECS, ECR, ELBs, CloudWatch, and Route 53
+  - HCP token with contributor role on your HCP project
 
 ## Components
 
@@ -28,6 +37,10 @@ The Packer templates illustrate a simple ancestry relationship with a golden bas
 ### Shared infrastructure
 
 - `terraform-shared-ecs` - Provisions an AWS ECS cluster and ALB in a dedicated VPC, to be used as a shared environment for HCP Waypoint application instances to live. Must be deployed as an HCP Terraform workspace because the output values are read by the module used for the HCP Waypoint template.
+
+### Demo bootstrap
+
+- `bootstrap` - Creates the necessary resources in HCP Terraform and HCP Waypoint for this demo.
 
 ### Related
 
