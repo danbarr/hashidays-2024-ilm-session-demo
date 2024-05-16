@@ -4,9 +4,11 @@ Watch this space!
 
 ## Prerequisites
 
-- A [HashiCorp Cloud Platform (HCP) account](https://developer.hashicorp.com/hcp/docs/hcp/create-account) with HCP Packer and HCP Waypoint activated
+- A [HashiCorp Cloud Platform (HCP) account](https://developer.hashicorp.com/hcp/docs/hcp/create-account) with HCP Packer and HCP Waypoint activated and [connected](https://developer.hashicorp.com/hcp/docs/waypoint/configure-hcp-terraform-integration) to your HCP Terraform organization
 - An [HCP Terraform organization](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-sign-up) with Plus tier licensing
+  - You must authorize HCP Terraform to your GitHub account via [GitHub App integration](https://developer.hashicorp.com/terraform/cloud-docs/vcs/github-app)
 - An AWS account with a Route 53 public hosted zone
+  - AWS credentials must be available in your HCP Terraform organization, usually a global variable set or connected to the projects this demo will create. I recommend using [dynamic provider credentials](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials/aws-configuration).
 
 Note this demo creates resources which are not part of the AWS Free Tier. You are responsible for any incurred costs.
 
