@@ -6,7 +6,7 @@ terraform {
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = "~> 0.89.0"
+      version = "~> 0.90.0"
     }
     time = {
       source  = "hashicorp/time"
