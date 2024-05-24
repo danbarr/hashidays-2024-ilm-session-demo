@@ -22,3 +22,8 @@ output "hcp_waypoint_template_id" {
   description = "ID of the HCP Waypoint template."
   value       = hcp_waypoint_application_template.ecs_service.id
 }
+
+output "hcp_waypoint_addon_id" {
+  description = "ID of the HCP Waypoint addon."
+  value       = hcp_waypoint_add_on_definition.ecs_s3.id
+}
