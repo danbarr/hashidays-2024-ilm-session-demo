@@ -10,7 +10,7 @@
     "@apollo/client": "^3.10.3",
     "@hashicorp/flight-icons": "^3.1.0",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "flatted": "^3.3.1",
     "graphql": "^16.8.1",
     "miragejs": "^0.1.48",
